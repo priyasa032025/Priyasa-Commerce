@@ -1,0 +1,105 @@
+openapi: 3.0.3
+info:
+  title: PRIYASA P51 Admin Commerce Actions
+  version: 1.0.51
+servers:
+  - url: /api/v1
+security:
+  - sanctum: []
+paths:
+  /admin/actions/orders/{order}/transition:
+    post:
+      summary: Transition an order
+      parameters:
+        - in: path
+          name: order
+          required: true
+          schema: {type: integer}
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [to]
+              properties:
+                to: {type: string}
+                note: {type: string}
+      responses:
+        '200': {description: Successful transition}
+        '400': {description: Missing idempotency key}
+        '403': {description: Permission denied}
+        '422': {description: Invalid transition}
+  /admin/actions/inventory/adjust:
+    post:
+      summary: Adjust warehouse inventory
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: {type: string}
+      responses:
+        '200': {description: Inventory adjusted}
+        '403': {description: Permission denied}
+        '422': {description: Validation error}
+  /admin/actions/warehouses/transfer:
+    post:
+      summary: Create warehouse transfer
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: {type: string}
+      responses:
+        '200': {description: Transfer created}
+  /admin/actions/fulfillment/{allocation}:
+    post:
+      summary: Execute fulfillment action
+      parameters:
+        - in: path
+          name: allocation
+          required: true
+          schema: {type: integer}
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: {type: string}
+      responses:
+        '200': {description: Fulfillment action completed}
+  /admin/actions/returns/{return}:
+    post:
+      summary: Execute return action
+      parameters:
+        - in: path
+          name: return
+          required: true
+          schema: {type: integer}
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: {type: string}
+      responses:
+        '200': {description: Return action completed}
+  /admin/actions/refunds/{refund}:
+    post:
+      summary: Execute refund workflow action
+      parameters:
+        - in: path
+          name: refund
+          required: true
+          schema: {type: integer}
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: {type: string}
+      responses:
+        '200': {description: Refund action completed}
+components:
+  securitySchemes:
+    sanctum:
+      type: http
+      scheme: bearer

@@ -1,0 +1,5 @@
+<?php
+declare(strict_types=1);
+namespace Modules\PriyasaCore\Http\Controllers\Storefront;
+use App\Http\Controllers\Controller; use Illuminate\Http\Request; use Modules\PriyasaCore\Models\Customer; use Modules\PriyasaCore\Models\Order; use Modules\PriyasaCore\Services\CustomerResolver; use Modules\PriyasaCore\Services\InvoiceService;
+final class InvoiceController extends Controller { private function customer(Request $r):Customer{return app(CustomerResolver::class)->resolve($r->user());} public function show(Request $r,Order $order,InvoiceService $service){$c=$this->customer($r); abort_unless((int)$order->customer_id===(int)$c->id,404); $invoice=$order->invoice()->first() ?? (in_array($order->status,['confirmed','processing','packed','shipped','in_transit','out_for_delivery','delivered'],true)?$service->issue($order):null); if(!$invoice)return response()->json(['success'=>false,'message'=>'Invoice is not available yet.'],422); return response()->json(['success'=>true,'data'=>$invoice]);} }

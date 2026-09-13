@@ -1,0 +1,13 @@
+<?php declare(strict_types=1); namespace Modules\PriyasaCore\Http\Controllers\Admin;
+use App\Http\Controllers\Controller; use Illuminate\Http\Request; use Modules\PriyasaCore\Services\Customer360Service;
+final class Customer360Controller extends Controller {
+ public function dashboard(Request $r,Customer360Service $s){return response()->json(['success'=>true,'type'=>'customer360.list','data'=>$s->dashboard($r->all())]);}
+ public function profile(int $customer,Customer360Service $s){return response()->json(['success'=>true,'type'=>'customer360.profile','data'=>$s->profile($customer)]);}
+ public function tag(Request $r,int $customer,Customer360Service $s){$d=$r->validate(['tag'=>'required|string|max:80','value'=>'nullable|string|max:180']);return response()->json(['success'=>true,'type'=>'customer360.tag','data'=>$s->upsertTag($customer,$d['tag'],$d['value']??null)]);}
+ public function removeTag(int $customer,string $tag,Customer360Service $s){return response()->json(['success'=>true,'type'=>'customer360.tag_removed','data'=>$s->removeTag($customer,$tag)]);}
+ public function note(Request $r,int $customer,Customer360Service $s){$d=$r->validate(['note'=>'required|string|max:5000']);return response()->json(['success'=>true,'type'=>'customer360.note','data'=>$s->addNote($customer,$d['note'],(string)optional($r->user())->id)]);}
+ public function consent(Request $r,int $customer,Customer360Service $s){$d=$r->validate(['channel'=>'required|string|max:32','purpose'=>'required|string|max:64','granted'=>'required|boolean','source'=>'nullable|string|max:64']);return response()->json(['success'=>true,'type'=>'customer360.consent','data'=>$s->consent($customer,$d['channel'],$d['purpose'],(bool)$d['granted'],$d['source']??null)]);}
+ public function segment(Request $r,int $customer,Customer360Service $s){$d=$r->validate(['segment'=>'required|string|max:80','source'=>'nullable|string|max:40','expires_at'=>'nullable|date']);return response()->json(['success'=>true,'type'=>'customer360.segment','data'=>$s->segment($customer,$d['segment'],$d['source']??null,$d['expires_at']??null)]);}
+ public function mergePreview(Request $r,Customer360Service $s){$d=$r->validate(['from_customer_id'=>'required|integer','to_customer_id'=>'required|integer']);return response()->json(['success'=>true,'type'=>'customer360.merge_preview','data'=>$s->mergePreview($d['from_customer_id'],$d['to_customer_id'])]);}
+ public function merge(Request $r,Customer360Service $s){$d=$r->validate(['from_customer_id'=>'required|integer','to_customer_id'=>'required|integer']);return response()->json(['success'=>true,'type'=>'customer360.merged','data'=>$s->merge($d['from_customer_id'],$d['to_customer_id'],(string)optional($r->user())->id)]);}
+}

@@ -1,0 +1,1 @@
+<?php declare(strict_types=1); namespace Modules\PriyasaCore\Models; use Modules\PriyasaCore\Models\PriyasaModel; class CustomerTag extends PriyasaModel { protected $table='priyasa_customer_tags'; protected $guarded=[]; public function customer(){return $this->belongsTo(Customer::class);} }

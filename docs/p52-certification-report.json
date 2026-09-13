@@ -1,0 +1,29 @@
+{
+    "status": "STATIC_CERTIFIED",
+    "php_files": 161,
+    "migration_files": 20,
+    "route_patch_files": 31,
+    "route_declarations": 140,
+    "passes": [
+        "161 PHP files pass syntax validation",
+        "20 migration files have unique timestamps",
+        "140 route declarations use canonical API-relative paths",
+        "Required asset present: Services/StorefrontApiContract.php",
+        "Required asset present: Http/Middleware/ApiContractHeaders.php",
+        "Required asset present: Http/Middleware/ApiContractResponse.php",
+        "Required asset present: Services/CheckoutTransactionService.php",
+        "Required asset present: Services/InventoryReservationService.php",
+        "Required asset present: Services/AdminActionService.php",
+        "Required asset present: docs/openapi.yaml",
+        "Required asset present: docs/swagger.html",
+        "OpenAPI 3.0.3 specification present",
+        "OpenAPI contains checkout and admin action contracts",
+        "Cumulative feature-contract test inventory is present (12 files)"
+    ],
+    "failures": [],
+    "warnings": [
+        "Customer360 still contains a legacy total_amount fallback; verify the production order schema before certification.",
+        "CustomerAccountExperience still contains a legacy total fallback; verify schema before certification."
+    ],
+    "note": "Static certification does not replace Laravel runtime/database/payment/courier E2E execution."
+}

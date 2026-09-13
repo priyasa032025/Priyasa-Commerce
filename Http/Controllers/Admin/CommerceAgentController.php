@@ -1,0 +1,4 @@
+<?php
+namespace Modules\PriyasaCore\Http\Controllers\Admin;
+use Illuminate\Http\Request; use Illuminate\Routing\Controller; use Modules\PriyasaCore\Models\CommerceConversation; use Modules\PriyasaCore\Models\CommerceConversationMessage;
+class CommerceAgentController extends Controller { public function conversations(Request $r){return response()->json(CommerceConversation::query()->with('messages')->latest('last_message_at')->paginate(min((int)$r->integer('per_page',25),100)));} public function handoff(CommerceConversation $conversation){$conversation->update(['status'=>'human']); return response()->json(['status'=>'human','conversation_id'=>$conversation->id]);} public function messages(CommerceConversation $conversation){return response()->json($conversation->messages()->latest()->paginate(100));}}

@@ -1,0 +1,17 @@
+<?php
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    protected $connection = 'priyasa';
+ public function up(): void {
+  if (!Schema::connection('priyasa')->hasTable('priyasa_wallets')) Schema::connection('priyasa')->create('priyasa_wallets', function(Blueprint $t){$t->id();$t->foreignId('customer_id')->unique()->constrained('priyasa_customers')->cascadeOnDelete();$t->decimal('balance',14,2)->default(0);$t->timestamps();});
+  if (!Schema::connection('priyasa')->hasTable('priyasa_wallet_transactions')) Schema::connection('priyasa')->create('priyasa_wallet_transactions', function(Blueprint $t){$t->id();$t->foreignId('customer_id')->constrained('priyasa_customers')->cascadeOnDelete();$t->foreignId('wallet_id')->constrained('priyasa_wallets')->cascadeOnDelete();$t->decimal('amount',14,2);$t->decimal('balance_after',14,2);$t->string('type',40);$t->string('reference_type',80)->nullable();$t->string('reference_id',100)->nullable();$t->string('idempotency_key',120)->unique();$t->json('metadata')->nullable();$t->timestamps();$t->index(['customer_id','created_at'], 'pc_wallet_customer_time_idx');});
+  if (!Schema::connection('priyasa')->hasTable('priyasa_loyalty_accounts')) Schema::connection('priyasa')->create('priyasa_loyalty_accounts', function(Blueprint $t){$t->id();$t->foreignId('customer_id')->unique()->constrained('priyasa_customers')->cascadeOnDelete();$t->unsignedBigInteger('points')->default(0);$t->string('tier',40)->default('member');$t->timestamps();});
+  if (!Schema::connection('priyasa')->hasTable('priyasa_loyalty_transactions')) Schema::connection('priyasa')->create('priyasa_loyalty_transactions', function(Blueprint $t){$t->id();$t->foreignId('customer_id')->constrained('priyasa_customers')->cascadeOnDelete();$t->foreignId('loyalty_account_id')->constrained('priyasa_loyalty_accounts')->cascadeOnDelete();$t->bigInteger('points');$t->bigInteger('balance_after');$t->string('type',40);$t->string('reference_type',80)->nullable();$t->string('reference_id',100)->nullable();$t->string('idempotency_key',120)->unique();$t->timestamp('expires_at')->nullable()->index();$t->json('metadata')->nullable();$t->timestamps();$t->index(['customer_id','created_at'], 'pc_wallet_customer_time_idx');});
+  if (!Schema::connection('priyasa')->hasTable('priyasa_referrals')) Schema::connection('priyasa')->create('priyasa_referrals', function(Blueprint $t){$t->id();$t->foreignId('referrer_customer_id')->constrained('priyasa_customers')->cascadeOnDelete();$t->foreignId('referred_customer_id')->unique()->constrained('priyasa_customers')->cascadeOnDelete();$t->string('code',32)->unique();$t->string('status',30)->default('pending');$t->timestamps();});
+  if (Schema::connection('priyasa')->hasTable('priyasa_customers')) Schema::connection('priyasa')->table('priyasa_customers', function(Blueprint $t){if(!Schema::connection('priyasa')->hasColumn('priyasa_customers','referral_code'))$t->string('referral_code',32)->nullable()->unique();});
+ }
+ public function down(): void {Schema::connection('priyasa')->dropIfExists('priyasa_loyalty_transactions');Schema::connection('priyasa')->dropIfExists('priyasa_loyalty_accounts');Schema::connection('priyasa')->dropIfExists('priyasa_wallet_transactions');Schema::connection('priyasa')->dropIfExists('priyasa_wallets');Schema::connection('priyasa')->dropIfExists('priyasa_referrals');}
+};

@@ -1,0 +1,1 @@
+<?php declare(strict_types=1); namespace Modules\PriyasaCore\Models; use Modules\PriyasaCore\Models\PriyasaModel; class CustomerNote extends PriyasaModel { protected $table='priyasa_customer_notes'; protected $guarded=[]; protected $casts=['created_at'=>'datetime','updated_at'=>'datetime']; }

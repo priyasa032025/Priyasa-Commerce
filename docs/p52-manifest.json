@@ -1,0 +1,11 @@
+{
+  "release": "P52",
+  "purpose": "Production API certification and E2E consolidation",
+  "migration_timestamps_unique": true,
+  "route_declarations_static": 139,
+  "php_files": 161,
+  "runtime_e2e_required": true,
+  "warnings": [
+    "Legacy total_amount fallback remains in Customer360Service/CustomerAccountExperienceService and must be verified against the host order schema."
+  ]
+}

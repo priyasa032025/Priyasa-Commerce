@@ -1,0 +1,395 @@
+openapi: 3.0.3
+info:
+  title: PRIYASA Commerce API
+  version: 1.0.52
+  description: |
+    Production-oriented PRIYASA storefront, commerce, fulfillment, support and admin API.
+    Authentication uses Laravel Sanctum bearer tokens for protected endpoints.
+servers:
+  - url: /api/v1
+security: []
+components:
+  securitySchemes:
+    sanctum:
+      type: http
+      scheme: bearer
+      bearerFormat: token
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        success: {type: boolean}
+        type: {type: string}
+        data: {}
+    ErrorResponse:
+      type: object
+      properties:
+        success: {type: boolean, example: false}
+        type: {type: string, example: validation_error}
+        errors: {type: object}
+    Customer360:
+      type: object
+      properties:
+        id: {type: integer}
+        name: {type: string, nullable: true}
+        email: {type: string, nullable: true}
+        phone: {type: string, nullable: true}
+paths:
+
+  /storefront/checkout/transaction/quote:
+    post:
+      summary: Authoritative checkout quote
+      description: Recalculates cart pricing, promotions, tax and delivery server-side. Client totals are ignored.
+      security: [{sanctum: []}]
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: false
+          schema: {type: string, maxLength: 191}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [shipping_address_id]
+              properties:
+                shipping_address_id: {type: integer}
+                coupon_code: {type: string, nullable: true}
+                payment_method: {type: string, enum: [razorpay, cod]}
+      responses:
+        '200': {description: Authoritative quote}
+        '422': {description: Validation or checkout eligibility failure}
+  /storefront/checkout/transaction/place:
+    post:
+      summary: Place order using authoritative checkout totals
+      security: [{sanctum: []}]
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: false
+          schema: {type: string, maxLength: 191}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [shipping_address_id, payment_method]
+              properties:
+                shipping_address_id: {type: integer}
+                coupon_code: {type: string, nullable: true}
+                payment_method: {type: string, enum: [razorpay, cod]}
+      responses:
+        '201': {description: Order created}
+        '409': {description: Idempotency conflict}
+        '422': {description: Checkout eligibility or total validation failure}
+  /storefront/bootstrap:
+    get:
+      summary: Storefront bootstrap
+      responses: {'200': {description: OK}}
+  /storefront/account/me:
+    get:
+      summary: Current account
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /storefront/session:
+    get:
+      summary: Session summary
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /storefront/session/rotate:
+    post:
+      summary: Rotate current session token
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /storefront/session/logout:
+    post:
+      summary: Logout current session
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /storefront/session/logout-all:
+    post:
+      summary: Logout all sessions
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /storefront/search:
+    get:
+      summary: Search catalog
+      responses: {'200': {description: OK}}
+  /storefront/search/suggestions:
+    get:
+      summary: Search suggestions
+      responses: {'200': {description: OK}}
+  /storefront/search/trending:
+    get:
+      summary: Trending searches
+      responses: {'200': {description: OK}}
+  /storefront/recommendations/home:
+    get:
+      summary: Personalized home recommendations
+      responses: {'200': {description: OK}}
+  /storefront/recommendations:
+    get:
+      summary: Personalized recommendations
+      responses: {'200': {description: OK}}
+  /storefront/cart/experience:
+    get:
+      summary: Cart
+      responses: {'200': {description: OK}}
+  /storefront/cart/items:
+    post:
+      summary: Add cart item
+      responses: {'200': {description: OK}}
+  /storefront/cart/merge:
+    post:
+      summary: Merge guest cart
+      responses: {'200': {description: OK}}
+  /storefront/wishlist:
+    get:
+      summary: Wishlist
+      responses: {'200': {description: OK}}
+  /storefront/wishlist/items:
+    post:
+      summary: Add wishlist item
+      responses: {'200': {description: OK}}
+  /storefront/wishlist/merge:
+    post:
+      summary: Merge guest wishlist
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /storefront/promotions:
+    get:
+      summary: Available promotions
+      responses: {'200': {description: OK}}
+  /storefront/promotions/validate:
+    post:
+      summary: Validate coupon
+      responses: {'200': {description: OK}}
+  /storefront/promotions/best:
+    post:
+      summary: Calculate best coupon
+      responses: {'200': {description: OK}}
+  /storefront/promotions/loyalty/apply:
+    post:
+      summary: Apply loyalty points
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /storefront/support/categories:
+    get:
+      summary: Support categories
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /storefront/support/tickets:
+    get:
+      summary: Customer support tickets
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+    post:
+      summary: Create support ticket
+      security: [{sanctum: []}]
+      responses: {'200': {description: Created}}
+  /storefront/support/tickets/{ticket}/messages:
+    post:
+      summary: Reply to support ticket
+      security: [{sanctum: []}]
+      parameters: [{name: ticket, in: path, required: true, schema: {type: integer}}]
+      responses: {'200': {description: OK}}
+  /storefront/support/tickets/{ticket}/close:
+    post:
+      summary: Close support ticket
+      security: [{sanctum: []}]
+      parameters: [{name: ticket, in: path, required: true, schema: {type: integer}}]
+      responses: {'200': {description: OK}}
+  /admin/customer-360:
+    get:
+      summary: Customer 360 queue
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /admin/customer-360/{customer}:
+    get:
+      summary: Customer 360 profile
+      security: [{sanctum: []}]
+      parameters: [{name: customer, in: path, required: true, schema: {type: integer}}]
+      responses: {'200': {description: OK, content: {application/json: {schema: {$ref: '#/components/schemas/ApiResponse'}}}}}
+  /admin/customer-360/{customer}/tags:
+    post:
+      summary: Add or update customer tag
+      security: [{sanctum: []}]
+      parameters: [{name: customer, in: path, required: true, schema: {type: integer}}]
+      responses: {'200': {description: OK}}
+  /admin/customer-360/{customer}/tags/{tag}:
+    delete:
+      summary: Remove customer tag
+      security: [{sanctum: []}]
+      parameters:
+        - {name: customer, in: path, required: true, schema: {type: integer}}
+        - {name: tag, in: path, required: true, schema: {type: string}}
+      responses: {'200': {description: OK}}
+  /admin/customer-360/{customer}/notes:
+    post:
+      summary: Add customer note
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /admin/customer-360/{customer}/consents:
+    put:
+      summary: Update marketing consent
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /admin/customer-360/{customer}/segments:
+    post:
+      summary: Assign customer segment
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /admin/customer-360/merge/preview:
+    post:
+      summary: Preview customer merge
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /admin/customer-360/merge:
+    post:
+      summary: Merge duplicate customers
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /admin/support/command-center:
+    get:
+      summary: Support command center dashboard
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /admin/support/orders/{order}/command-center:
+    get:
+      summary: Order support command center
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /admin/support/tickets/{ticket}/command-center:
+    get:
+      summary: Ticket support command center
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /admin/reviews:
+    get:
+      summary: Review moderation queue
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /admin/promotions/performance:
+    get:
+      summary: Promotion performance
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /admin/finance/reports/closing:
+    get:
+      summary: Financial closing report
+      security: [{sanctum: []}]
+      responses: {'200': {description: OK}}
+  /webhooks/meta/whatsapp:
+    post:
+      summary: Meta WhatsApp webhook
+      responses: {'200': {description: Accepted}}
+  /webhooks/razorpay:
+    post:
+      summary: Razorpay webhook
+      responses: {'200': {description: Accepted}}
+  /webhooks/shiprocket:
+    post:
+      summary: Shiprocket webhook
+      responses: {'200': {description: Accepted}}
+
+  /admin/control-center:
+    get:
+      summary: Admin commerce control-center overview
+      security: [{sanctum: []}]
+      responses:
+        '200': {description: Operational overview}
+  /admin/control-center/orders:
+    get:
+      summary: Admin order queue
+      security: [{sanctum: []}]
+      parameters:
+        - {name: status, in: query, schema: {type: string}}
+        - {name: payment_status, in: query, schema: {type: string}}
+        - {name: payment_method, in: query, schema: {type: string}}
+        - {name: q, in: query, schema: {type: string}}
+        - {name: per_page, in: query, schema: {type: integer, minimum: 1, maximum: 100}}
+      responses:
+        '200': {description: Paginated orders}
+  /admin/control-center/inventory:
+    get:
+      summary: Admin low-stock inventory
+      security: [{sanctum: []}]
+      parameters:
+        - {name: threshold, in: query, schema: {type: integer, minimum: 0}}
+      responses:
+        '200': {description: Inventory queues}
+  /admin/control-center/operations:
+    get:
+      summary: Admin operational queues
+      security: [{sanctum: []}]
+      responses:
+        '200': {description: Operational queue counts}
+
+  /admin/actions/orders/{order}/transition:
+    post:
+      summary: Transition an order state
+      security: [{sanctum: []}]
+      parameters:
+        - {name: Idempotency-Key, in: header, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Order transitioned}
+        '403': {description: Permission denied}
+        '409': {description: Idempotency conflict}
+  /admin/actions/inventory/adjust:
+    post:
+      summary: Adjust inventory
+      security: [{sanctum: []}]
+      parameters:
+        - {name: Idempotency-Key, in: header, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Inventory adjusted}
+        '403': {description: Permission denied}
+        '409': {description: Idempotency conflict}
+  /admin/actions/warehouses/transfer:
+    post:
+      summary: Create warehouse transfer
+      security: [{sanctum: []}]
+      parameters:
+        - {name: Idempotency-Key, in: header, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Transfer created}
+        '403': {description: Permission denied}
+        '409': {description: Idempotency conflict}
+  /admin/actions/fulfillment/{allocation}:
+    post:
+      summary: Execute fulfillment allocation action
+      security: [{sanctum: []}]
+      parameters:
+        - {name: Idempotency-Key, in: header, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Fulfillment action completed}
+        '403': {description: Permission denied}
+        '409': {description: Idempotency conflict}
+  /admin/actions/returns/{return}:
+    post:
+      summary: Execute return action
+      security: [{sanctum: []}]
+      parameters:
+        - {name: Idempotency-Key, in: header, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Return action completed}
+        '403': {description: Permission denied}
+        '409': {description: Idempotency conflict}
+  /admin/actions/refunds/{refund}:
+    post:
+      summary: Execute refund action
+      security: [{sanctum: []}]
+      parameters:
+        - {name: Idempotency-Key, in: header, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Refund action completed}
+        '403': {description: Permission denied}
+        '409': {description: Idempotency conflict}
+
+  /docs/openapi.routes.json:
+    get:
+      summary: Runtime API route inventory
+      responses:
+        '200': {description: JSON route inventory}

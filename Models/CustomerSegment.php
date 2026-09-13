@@ -1,0 +1,1 @@
+<?php declare(strict_types=1); namespace Modules\PriyasaCore\Models; use Modules\PriyasaCore\Models\PriyasaModel; class CustomerSegment extends PriyasaModel { protected $table='priyasa_customer_segments'; protected $guarded=[]; protected $casts=['expires_at'=>'datetime']; }

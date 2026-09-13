@@ -1,0 +1,30 @@
+{
+  "release": "P52-FINAL",
+  "purpose": "Consolidated production deployment for PRIYASA Storefront + Admin APIs",
+  "php_files": 392,
+  "migration_files": 62,
+  "route_declarations_static": 337,
+  "provider": "Providers/PriyasaCoreServiceProvider.php",
+  "canonical_routes": "Routes/api.php + Routes/api_features.php",
+  "middleware_aliases": [
+    "priyasa.admin",
+    "priyasa.admin.permission",
+    "priyasa.admin.security",
+    "priyasa.admin.permission.v2",
+    "idempotency",
+    "request.correlation",
+    "api.contract.headers",
+    "api.contract",
+    "priyasa.auth.rate_limit"
+  ],
+  "runtime_certification_command": "php artisan priyasa:api-certify --strict",
+  "e2e_command": "APP_ENV=testing P52_ALLOW_DB_RESET=1 ./p52_run_e2e.sh",
+  "external_provider_certification_required": true,
+  "static_checks": {
+    "php_syntax": "PASS",
+    "duplicate_classes": "PASS",
+    "duplicate_migration_content": "PASS",
+    "provider_present": "PASS",
+    "canonical_route_loader": "PASS"
+  }
+}

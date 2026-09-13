@@ -1,0 +1,535 @@
+{
+  "generated_from": "routes_p*.patch",
+  "route_count": 127,
+  "routes": [
+    {
+      "source": "routes_p21.patch",
+      "declaration": "Route::get('/tax', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\FinancialReportsController::class,'tax'])->middleware('priyasa.admin.permission:finance.view');"
+    },
+    {
+      "source": "routes_p21.patch",
+      "declaration": "Route::get('/invoices', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\FinancialReportsController::class,'invoices'])->middleware('priyasa.admin.permission:finance.view');"
+    },
+    {
+      "source": "routes_p21.patch",
+      "declaration": "Route::get('/refunds', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\FinancialReportsController::class,'refunds'])->middleware('priyasa.admin.permission:finance.view');"
+    },
+    {
+      "source": "routes_p21.patch",
+      "declaration": "Route::get('/wallet', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\FinancialReportsController::class,'wallet'])->middleware('priyasa.admin.permission:finance.view');"
+    },
+    {
+      "source": "routes_p21.patch",
+      "declaration": "Route::get('/loyalty', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\FinancialReportsController::class,'loyalty'])->middleware('priyasa.admin.permission:finance.view');"
+    },
+    {
+      "source": "routes_p21.patch",
+      "declaration": "Route::get('/closing', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\FinancialReportsController::class,'closing'])->middleware('priyasa.admin.permission:finance.view');"
+    },
+    {
+      "source": "routes_p22.patch",
+      "declaration": "Route::post('/intent', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\CommerceAIController::class,'intent'])->middleware('priyasa.admin.permission:analytics.view');"
+    },
+    {
+      "source": "routes_p22.patch",
+      "declaration": "Route::post('/product-content', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\CommerceAIController::class,'productContent'])->middleware('priyasa.admin.permission:catalog.manage');"
+    },
+    {
+      "source": "routes_p23.patch",
+      "declaration": "Route::post('/storefront/commerce-agent/message',[\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CommerceAgentController::class,'message'])->middleware('auth:sanctum');"
+    },
+    {
+      "source": "routes_p23.patch",
+      "declaration": "Route::get('/conversations',[\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\CommerceAgentController::class,'conversations'])->middleware('priyasa.admin.permission:analytics.view');"
+    },
+    {
+      "source": "routes_p23.patch",
+      "declaration": "Route::get('/conversations/{conversation}/messages',[\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\CommerceAgentController::class,'messages'])->middleware('priyasa.admin.permission:analytics.view');"
+    },
+    {
+      "source": "routes_p23.patch",
+      "declaration": "Route::post('/conversations/{conversation}/handoff',[\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\CommerceAgentController::class,'handoff'])->middleware('priyasa.admin.permission:orders.manage');"
+    },
+    {
+      "source": "routes_p24.patch",
+      "declaration": "Route::match(['get','post'],'/webhooks/meta/whatsapp', [\\Modules\\PriyasaCore\\Http\\Controllers\\Webhooks\\MetaWhatsAppController::class,'receive']);"
+    },
+    {
+      "source": "routes_p24.patch",
+      "declaration": "Route::get('/webhooks/meta/whatsapp/verify', [\\Modules\\PriyasaCore\\Http\\Controllers\\Webhooks\\MetaWhatsAppController::class,'verify']);"
+    },
+    {
+      "source": "routes_p25.patch",
+      "declaration": "Route::post('/webhooks/meta/whatsapp', [\\Modules\\PriyasaCore\\Http\\Controllers\\Webhooks\\MetaWhatsAppController::class,'receive']);"
+    },
+    {
+      "source": "routes_p25.patch",
+      "declaration": "Route::get('/webhooks/meta/whatsapp/verify', [\\Modules\\PriyasaCore\\Http\\Controllers\\Webhooks\\MetaWhatsAppController::class,'verify']);"
+    },
+    {
+      "source": "routes_p25.patch",
+      "declaration": "Route::post('/storefront/whatsapp/send-interactive', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\WhatsAppCommerceController::class,'sendInteractive'])->middleware('auth:sanctum');"
+    },
+    {
+      "source": "routes_p26.patch",
+      "declaration": "Route::get('/storefront/bootstrap', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\ApiContractController::class,'bootstrap']);"
+    },
+    {
+      "source": "routes_p26.patch",
+      "declaration": "Route::get('/storefront/account/me', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\ApiContractController::class,'me']);"
+    },
+    {
+      "source": "routes_p27.patch",
+      "declaration": "Route::get('/', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\AuthSessionController::class,'show']);"
+    },
+    {
+      "source": "routes_p27.patch",
+      "declaration": "Route::post('/rotate', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\AuthSessionController::class,'rotate']);"
+    },
+    {
+      "source": "routes_p27.patch",
+      "declaration": "Route::post('/logout', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\AuthSessionController::class,'logout']);"
+    },
+    {
+      "source": "routes_p27.patch",
+      "declaration": "Route::post('/logout-all', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\AuthSessionController::class,'logoutAll']);"
+    },
+    {
+      "source": "routes_p28.patch",
+      "declaration": "Route::post('/storefront/notifications/devices', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\NotificationPlatformController::class,'register']);"
+    },
+    {
+      "source": "routes_p28.patch",
+      "declaration": "Route::delete('/storefront/notifications/devices', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\NotificationPlatformController::class,'unregister']);"
+    },
+    {
+      "source": "routes_p28.patch",
+      "declaration": "Route::get('/storefront/notifications/inbox', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\NotificationPlatformController::class,'inbox']);"
+    },
+    {
+      "source": "routes_p28.patch",
+      "declaration": "Route::get('/storefront/notifications/unread', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\NotificationPlatformController::class,'unread']);"
+    },
+    {
+      "source": "routes_p28.patch",
+      "declaration": "Route::post('/storefront/notifications/{id}/read', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\NotificationPlatformController::class,'read']);"
+    },
+    {
+      "source": "routes_p29.patch",
+      "declaration": "Route::get('/storefront/notifications/preferences', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\NotificationPreferenceController::class,'index']);"
+    },
+    {
+      "source": "routes_p29.patch",
+      "declaration": "Route::put('/storefront/notifications/preferences', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\NotificationPreferenceController::class,'update']);"
+    },
+    {
+      "source": "routes_p30.patch",
+      "declaration": "Route::post('/storefront/checkout/create-order', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CheckoutController::class, 'createOrder'])"
+    },
+    {
+      "source": "routes_p30.patch",
+      "declaration": "Route::post('/admin/ops/inventory-reservations/expire', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\OperationsReliabilityController::class, 'expireReservations'])"
+    },
+    {
+      "source": "routes_p31.patch",
+      "declaration": "Route::post('/orders/{order}/payment', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\PaymentController::class, 'create'])->middleware('idempotency');"
+    },
+    {
+      "source": "routes_p31.patch",
+      "declaration": "Route::post('/orders/{order}/payment/capture', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\PaymentController::class, 'capture'])->middleware('idempotency');"
+    },
+    {
+      "source": "routes_p31.patch",
+      "declaration": "Route::get('/orders/{order}/payment', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\PaymentController::class, 'status']);"
+    },
+    {
+      "source": "routes_p31.patch",
+      "declaration": "Route::post('/webhooks/razorpay', \\Modules\\PriyasaCore\\Http\\Controllers\\Webhooks\\RazorpayWebhookController::class);"
+    },
+    {
+      "source": "routes_p32.patch",
+      "declaration": "Route::get('/admin/inventory/warehouses', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\WarehouseInventoryController::class, 'warehouses']);"
+    },
+    {
+      "source": "routes_p32.patch",
+      "declaration": "Route::get('/admin/inventory/warehouse-stock', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\WarehouseInventoryController::class, 'inventory']);"
+    },
+    {
+      "source": "routes_p32.patch",
+      "declaration": "Route::post('/admin/inventory/warehouse-adjust', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\WarehouseInventoryController::class, 'adjust']);"
+    },
+    {
+      "source": "routes_p33.patch",
+      "declaration": "Route::post('/admin/orders/{order}/fulfillment/allocate', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\FulfillmentAllocationController::class, 'allocate']);"
+    },
+    {
+      "source": "routes_p33.patch",
+      "declaration": "Route::get('/admin/orders/{order}/fulfillment', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\FulfillmentAllocationController::class, 'show']);"
+    },
+    {
+      "source": "routes_p33.patch",
+      "declaration": "Route::post('/admin/fulfillment/allocations/{allocation}/pick', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\FulfillmentAllocationController::class, 'pick']);"
+    },
+    {
+      "source": "routes_p33.patch",
+      "declaration": "Route::post('/admin/fulfillment/allocations/{allocation}/pack', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\FulfillmentAllocationController::class, 'pack']);"
+    },
+    {
+      "source": "routes_p33.patch",
+      "declaration": "Route::post('/admin/fulfillment/allocations/{allocation}/cancel', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\FulfillmentAllocationController::class, 'cancel']);"
+    },
+    {
+      "source": "routes_p33.patch",
+      "declaration": "Route::post('/admin/fulfillment/transfers', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\FulfillmentAllocationController::class, 'transfer']);"
+    },
+    {
+      "source": "routes_p33.patch",
+      "declaration": "Route::get('/admin/fulfillment/transfers', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\FulfillmentAllocationController::class, 'transfers']);"
+    },
+    {
+      "source": "routes_p33.patch",
+      "declaration": "Route::post('/admin/fulfillment/transfers/{transfer}/receive', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\FulfillmentAllocationController::class, 'receiveTransfer']);"
+    },
+    {
+      "source": "routes_p34.patch",
+      "declaration": "Route::post('/admin/orders/{order}/shipping/create', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\ShippingOrchestrationController::class, 'create']);"
+    },
+    {
+      "source": "routes_p34.patch",
+      "declaration": "Route::get('/admin/orders/{order}/shipping', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\ShippingOrchestrationController::class, 'show']);"
+    },
+    {
+      "source": "routes_p34.patch",
+      "declaration": "Route::post('/admin/shipping/{shipment}/label', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\ShippingOrchestrationController::class, 'label']);"
+    },
+    {
+      "source": "routes_p34.patch",
+      "declaration": "Route::post('/admin/shipping/{shipment}/pickup', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\ShippingOrchestrationController::class, 'pickup']);"
+    },
+    {
+      "source": "routes_p34.patch",
+      "declaration": "Route::post('/admin/shipping/{shipment}/sync', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\ShippingOrchestrationController::class, 'sync']);"
+    },
+    {
+      "source": "routes_p34.patch",
+      "declaration": "Route::post('/admin/shipping/{shipment}/cancel', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\ShippingOrchestrationController::class, 'cancel']);"
+    },
+    {
+      "source": "routes_p34.patch",
+      "declaration": "Route::post('/webhooks/shiprocket', [\\Modules\\PriyasaCore\\Http\\Controllers\\Webhooks\\ShiprocketWebhookController::class, 'handle']);"
+    },
+    {
+      "source": "routes_p35.patch",
+      "declaration": "Route::post('/admin/returns/{return}/reverse-shipment', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\ReverseLogisticsController::class, 'createReturnShipment']);"
+    },
+    {
+      "source": "routes_p35.patch",
+      "declaration": "Route::post('/admin/reverse-shipments/{shipment}/status', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\ReverseLogisticsController::class, 'reverseStatus']);"
+    },
+    {
+      "source": "routes_p35.patch",
+      "declaration": "Route::post('/admin/shipments/{shipment}/ndr', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\ReverseLogisticsController::class, 'ndr']);"
+    },
+    {
+      "source": "routes_p35.patch",
+      "declaration": "Route::post('/admin/ndr/{case}/resolve', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\ReverseLogisticsController::class, 'resolveNdr']);"
+    },
+    {
+      "source": "routes_p35.patch",
+      "declaration": "Route::post('/admin/returns/{return}/qc', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\ReverseLogisticsController::class, 'qc']);"
+    },
+    {
+      "source": "routes_p35.patch",
+      "declaration": "Route::post('/admin/returns/{return}/exchange', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\ReverseLogisticsController::class, 'exchange']);"
+    },
+    {
+      "source": "routes_p36.patch",
+      "declaration": "Route::get('/api/v1/storefront/products/{product}', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\ProductExperienceController::class,'show']);"
+    },
+    {
+      "source": "routes_p36.patch",
+      "declaration": "Route::get('/api/v1/storefront/variants/{variant}/availability', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\ProductExperienceController::class,'availability']);"
+    },
+    {
+      "source": "routes_p37.patch",
+      "declaration": "Route::get('/api/v1/storefront/search', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\SearchDiscoveryController::class,'search']);"
+    },
+    {
+      "source": "routes_p37.patch",
+      "declaration": "Route::get('/api/v1/storefront/search/suggestions', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\SearchDiscoveryController::class,'suggestions']);"
+    },
+    {
+      "source": "routes_p37.patch",
+      "declaration": "Route::get('/api/v1/storefront/search/trending', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\SearchDiscoveryController::class,'trending']);"
+    },
+    {
+      "source": "routes_p38.patch",
+      "declaration": "Route::get('/recommendations/home', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\PersonalizedDiscoveryController::class, 'home']);"
+    },
+    {
+      "source": "routes_p38.patch",
+      "declaration": "Route::get('/recommendations', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\PersonalizedDiscoveryController::class, 'recommendations']);"
+    },
+    {
+      "source": "routes_p39.patch",
+      "declaration": "Route::get('/cart/experience', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CartExperienceController::class, 'show']);"
+    },
+    {
+      "source": "routes_p39.patch",
+      "declaration": "Route::post('/cart/items', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CartExperienceController::class, 'add']);"
+    },
+    {
+      "source": "routes_p39.patch",
+      "declaration": "Route::patch('/cart/items/{item}', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CartExperienceController::class, 'update']);"
+    },
+    {
+      "source": "routes_p39.patch",
+      "declaration": "Route::delete('/cart/items/{item}', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CartExperienceController::class, 'remove']);"
+    },
+    {
+      "source": "routes_p39.patch",
+      "declaration": "Route::post('/cart/merge', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CartExperienceController::class, 'merge']);"
+    },
+    {
+      "source": "routes_p40.patch",
+      "declaration": "Route::get('/addresses', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CheckoutExperienceController::class, 'addresses']);"
+    },
+    {
+      "source": "routes_p40.patch",
+      "declaration": "Route::post('/addresses', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CheckoutExperienceController::class, 'createAddress']);"
+    },
+    {
+      "source": "routes_p40.patch",
+      "declaration": "Route::patch('/addresses/{address}', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CheckoutExperienceController::class, 'updateAddress']);"
+    },
+    {
+      "source": "routes_p40.patch",
+      "declaration": "Route::delete('/addresses/{address}', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CheckoutExperienceController::class, 'deleteAddress']);"
+    },
+    {
+      "source": "routes_p40.patch",
+      "declaration": "Route::post('/addresses/{address}/default', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CheckoutExperienceController::class, 'setDefault']);"
+    },
+    {
+      "source": "routes_p40.patch",
+      "declaration": "Route::post('/delivery', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CheckoutExperienceController::class, 'delivery']);"
+    },
+    {
+      "source": "routes_p40.patch",
+      "declaration": "Route::post('/quote', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CheckoutExperienceController::class, 'quote']);"
+    },
+    {
+      "source": "routes_p40.patch",
+      "declaration": "Route::post('/place', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CheckoutExperienceController::class, 'place']);"
+    },
+    {
+      "source": "routes_p41.patch",
+      "declaration": "Route::get('/me', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CustomerAccountExperienceController::class, 'me']);"
+    },
+    {
+      "source": "routes_p41.patch",
+      "declaration": "Route::get('/dashboard', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CustomerAccountExperienceController::class, 'dashboard']);"
+    },
+    {
+      "source": "routes_p41.patch",
+      "declaration": "Route::get('/orders', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CustomerAccountExperienceController::class, 'orders']);"
+    },
+    {
+      "source": "routes_p41.patch",
+      "declaration": "Route::get('/orders/{order}', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CustomerAccountExperienceController::class, 'order']);"
+    },
+    {
+      "source": "routes_p41.patch",
+      "declaration": "Route::get('/security', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CustomerAccountExperienceController::class, 'security']);"
+    },
+    {
+      "source": "routes_p42.patch",
+      "declaration": "Route::get('/products/{product}/reviews', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\ReviewController::class, 'index']);"
+    },
+    {
+      "source": "routes_p42.patch",
+      "declaration": "Route::post('/reviews', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\ReviewController::class, 'store'])->middleware('auth:sanctum');"
+    },
+    {
+      "source": "routes_p42.patch",
+      "declaration": "Route::post('/reviews/{review}/vote', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\ReviewController::class, 'vote'])->middleware('auth:sanctum');"
+    },
+    {
+      "source": "routes_p42.patch",
+      "declaration": "Route::get('/account/reviews', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\ReviewController::class, 'mine'])->middleware('auth:sanctum');"
+    },
+    {
+      "source": "routes_p42.patch",
+      "declaration": "Route::get('/', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\ReviewModerationController::class, 'index']);"
+    },
+    {
+      "source": "routes_p42.patch",
+      "declaration": "Route::post('/{review}/moderate', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\ReviewModerationController::class, 'moderate']);"
+    },
+    {
+      "source": "routes_p43.patch",
+      "declaration": "Route::get('/wishlist', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\WishlistEngagementController::class, 'index']);"
+    },
+    {
+      "source": "routes_p43.patch",
+      "declaration": "Route::post('/wishlist/items', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\WishlistEngagementController::class, 'add']);"
+    },
+    {
+      "source": "routes_p43.patch",
+      "declaration": "Route::delete('/wishlist/items/{item}', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\WishlistEngagementController::class, 'remove']);"
+    },
+    {
+      "source": "routes_p43.patch",
+      "declaration": "Route::post('/wishlist/merge', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\WishlistEngagementController::class, 'merge'])->middleware('auth:sanctum');"
+    },
+    {
+      "source": "routes_p43.patch",
+      "declaration": "Route::put('/products/{product}/alerts', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\WishlistEngagementController::class, 'alert']);"
+    },
+    {
+      "source": "routes_p44.patch",
+      "declaration": "Route::get('/promotions', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\PromotionExperienceController::class, 'index']);"
+    },
+    {
+      "source": "routes_p44.patch",
+      "declaration": "Route::post('/promotions/validate', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\PromotionExperienceController::class, 'validateCode']);"
+    },
+    {
+      "source": "routes_p44.patch",
+      "declaration": "Route::post('/promotions/best', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\PromotionExperienceController::class, 'best']);"
+    },
+    {
+      "source": "routes_p44.patch",
+      "declaration": "Route::post('/promotions/loyalty/apply', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\PromotionExperienceController::class, 'loyalty'])->middleware('auth:sanctum');"
+    },
+    {
+      "source": "routes_p44.patch",
+      "declaration": "Route::get('/promotions/performance', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\PromotionExperienceController::class, 'performance']);"
+    },
+    {
+      "source": "routes_p45.patch",
+      "declaration": "Route::get('/support/categories', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CustomerSupportController::class, 'categories']);"
+    },
+    {
+      "source": "routes_p45.patch",
+      "declaration": "Route::get('/support/tickets', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CustomerSupportController::class, 'index']);"
+    },
+    {
+      "source": "routes_p45.patch",
+      "declaration": "Route::post('/support/tickets', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CustomerSupportController::class, 'create']);"
+    },
+    {
+      "source": "routes_p45.patch",
+      "declaration": "Route::get('/support/tickets/{ticket}', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CustomerSupportController::class, 'show']);"
+    },
+    {
+      "source": "routes_p45.patch",
+      "declaration": "Route::post('/support/tickets/{ticket}/messages', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CustomerSupportController::class, 'reply']);"
+    },
+    {
+      "source": "routes_p45.patch",
+      "declaration": "Route::post('/support/tickets/{ticket}/close', [\\Modules\\PriyasaCore\\Http\\Controllers\\Storefront\\CustomerSupportController::class, 'close']);"
+    },
+    {
+      "source": "routes_p45.patch",
+      "declaration": "Route::get('/support/tickets', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\CustomerSupportController::class, 'index']);"
+    },
+    {
+      "source": "routes_p45.patch",
+      "declaration": "Route::get('/support/tickets/{ticket}', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\CustomerSupportController::class, 'show']);"
+    },
+    {
+      "source": "routes_p45.patch",
+      "declaration": "Route::patch('/support/tickets/{ticket}', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\CustomerSupportController::class, 'update']);"
+    },
+    {
+      "source": "routes_p45.patch",
+      "declaration": "Route::post('/support/tickets/{ticket}/messages', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\CustomerSupportController::class, 'reply']);"
+    },
+    {
+      "source": "routes_p46.patch",
+      "declaration": "Route::get('/support/command-center', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\SupportCommandCenterController::class, 'dashboard']);"
+    },
+    {
+      "source": "routes_p46.patch",
+      "declaration": "Route::get('/support/orders/{order}/command-center', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\SupportCommandCenterController::class, 'order']);"
+    },
+    {
+      "source": "routes_p46.patch",
+      "declaration": "Route::get('/support/tickets/{ticket}/command-center', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\SupportCommandCenterController::class, 'ticket']);"
+    },
+    {
+      "source": "routes_p46.patch",
+      "declaration": "Route::post('/support/tickets/{ticket}/links', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\SupportCommandCenterController::class, 'link']);"
+    },
+    {
+      "source": "routes_p46.patch",
+      "declaration": "Route::post('/support/tickets/{ticket}/resolve', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\SupportCommandCenterController::class, 'resolve']);"
+    },
+    {
+      "source": "routes_p46.patch",
+      "declaration": "Route::post('/support/tickets/{ticket}/reopen', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\SupportCommandCenterController::class, 'reopen']);"
+    },
+    {
+      "source": "routes_p46.patch",
+      "declaration": "Route::post('/support/tickets/{ticket}/notify-customer', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\SupportCommandCenterController::class, 'notify']);"
+    },
+    {
+      "source": "routes_p47.patch",
+      "declaration": "Route::get('/', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\Customer360Controller::class,'dashboard']);"
+    },
+    {
+      "source": "routes_p47.patch",
+      "declaration": "Route::post('/merge/preview', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\Customer360Controller::class,'mergePreview']);"
+    },
+    {
+      "source": "routes_p47.patch",
+      "declaration": "Route::post('/merge', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\Customer360Controller::class,'merge']);"
+    },
+    {
+      "source": "routes_p47.patch",
+      "declaration": "Route::get('/{customer}', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\Customer360Controller::class,'profile']);"
+    },
+    {
+      "source": "routes_p47.patch",
+      "declaration": "Route::post('/{customer}/tags', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\Customer360Controller::class,'tag']);"
+    },
+    {
+      "source": "routes_p47.patch",
+      "declaration": "Route::delete('/{customer}/tags/{tag}', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\Customer360Controller::class,'removeTag']);"
+    },
+    {
+      "source": "routes_p47.patch",
+      "declaration": "Route::post('/{customer}/notes', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\Customer360Controller::class,'note']);"
+    },
+    {
+      "source": "routes_p47.patch",
+      "declaration": "Route::put('/{customer}/consents', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\Customer360Controller::class,'consent']);"
+    },
+    {
+      "source": "routes_p47.patch",
+      "declaration": "Route::post('/{customer}/segments', [\\Modules\\PriyasaCore\\Http\\Controllers\\Admin\\Customer360Controller::class,'segment']);"
+    },
+    {
+      "method": "GET",
+      "uri": "/api/v1/admin/control-center",
+      "handler": "AdminCommerceControlCenterController@overview"
+    },
+    {
+      "method": "GET",
+      "uri": "/api/v1/admin/control-center/orders",
+      "handler": "AdminCommerceControlCenterController@orders"
+    },
+    {
+      "method": "GET",
+      "uri": "/api/v1/admin/control-center/inventory",
+      "handler": "AdminCommerceControlCenterController@inventory"
+    },
+    {
+      "method": "GET",
+      "uri": "/api/v1/admin/control-center/operations",
+      "handler": "AdminCommerceControlCenterController@operations"
+    }
+  ],
+  "api_version": "1.0.50"
+}

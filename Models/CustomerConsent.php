@@ -1,0 +1,1 @@
+<?php declare(strict_types=1); namespace Modules\PriyasaCore\Models; use Modules\PriyasaCore\Models\PriyasaModel; class CustomerConsent extends PriyasaModel { protected $table='priyasa_customer_consents'; protected $guarded=[]; protected $casts=['granted'=>'boolean','granted_at'=>'datetime','revoked_at'=>'datetime']; }
